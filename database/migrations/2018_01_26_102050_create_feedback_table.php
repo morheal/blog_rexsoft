@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeeedbacksTable extends Migration
+class CreateFeedbackTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateFeeedbacksTable extends Migration
      */
     public function up()
     {
-        Schema::create('feeedbacks', function (Blueprint $table) {
+        Schema::create('feedback', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('article_id');
+            $table->integer('user_id');
+            $table->string('text');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateFeeedbacksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feeedbacks');
+        Schema::dropIfExists('feedback');
     }
 }

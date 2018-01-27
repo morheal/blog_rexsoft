@@ -1,5 +1,5 @@
 <div class="article">
-  <h3>{{$article->title}}</h3>
+  <h3><a href="/article/{{$article->id}}">{{$article->title}}</a></h3>
   <p>{{$article->text}}</p>
   <input type="hidden" name="article_id" value="{{$article->id}}" class="article_id">
   <p><a href="/category/{{$article->category->id}}">{{$article->category->name}}</a></p>

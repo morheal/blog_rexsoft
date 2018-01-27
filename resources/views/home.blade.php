@@ -22,6 +22,11 @@
                         {{ Form::select('category', $categories) }}
                         {{ Form::submit('Add article') }}
                     {{Form::close()}}
+
+                    <div>
+                      <input type="checkbox" name="subscribe" class="subscribe">
+                      <label for="subscribe">Подписаться на рассылку</label>
+                    </div>
                     @endguest
 
                     <div class="articles">
@@ -35,6 +40,14 @@
         </div>
     </div>
 </div>
+
+@if(Auth::user()->subscribe)
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.subscribe').prop('checked', true);
+  });
+</script>
+@endif
 
 <script type="text/javascript">
   $(document).on("submit", ".add_article", function(e) {
@@ -52,7 +65,7 @@
         data: { title: $(".add_article #title").val(), text: $(".add_article #text").val(), category: $(".add_article select").val() },
         //adding new article block if ajax was success
         success: function(success) {
-          $(".articles").append("<div class='article'><h3>"+success.article.title+'</h3><p>'+success.article.text+"</p><p>"+success.category_name+"</p><p><a class='delete_article' href='#'>Delete article</a></p></div>");
+          $(".articles").append("<div class='article'><a href='/article/"+success.article.id+"'><h3>"+success.article.title+'</h3></a><p>'+success.article.text+"</p><p>"+success.category_name+"</p><p><a class='delete_article' href='#'>Delete article</a></p></div>");
         }
       });
   });
@@ -75,6 +88,40 @@
           $("input[value='" + success + "']").parent().remove();
         }
       });
+  });
+
+  $(document).on("change", ".subscribe", function(e) {
+      e.preventDefault();
+      if(this.checked) {
+        $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          })
+          $.ajax({
+            type: "POST",
+            url: "/subscribe",
+            dataType: 'json',
+            data: { },
+            //adding new article block if ajax was success
+            success: function(success) { }
+        });
+      }
+      else {
+        $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          })
+          $.ajax({
+            type: "POST",
+            url: "/unsubscribe",
+            dataType: 'json',
+            data: { },
+            //adding new article block if ajax was success
+            success: function(success) { }
+        });
+      }
   });
 </script>
 @endsection

@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <script type="text/javascript" src="js/libs.min.js"></script>
+    <script type="text/javascript" src="/js/libs.min.js"></script>
 </head>
 <body>
     <div id="app">
