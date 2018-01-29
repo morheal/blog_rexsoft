@@ -33,3 +33,8 @@ Route::post('/add_feedback', 'FeedbackController@addFeedback');
 Route::post('/delete_feedback', 'FeedbackController@deleteFeedback');
 Route::post('/subscribe', 'UserController@subscribe');
 Route::post('/unsubscribe', 'UserController@unsubscribe');
+
+//AUTHENTIFICATION BY GOOGLE ROUTES
+Route::get('/google_register', 'Auth\LoginController@redirectToProvider');
+Route::get('/google_login', 'Auth\LoginController@redirectToProvider');
+Route::get('/google_callback', 'Auth\LoginController@handleProviderCallback');

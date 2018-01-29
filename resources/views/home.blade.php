@@ -41,7 +41,7 @@
     </div>
 </div>
 
-@if(Auth::user()->subscribe)
+@if(Auth::check() and Auth::user()->subscribe)
 <script type="text/javascript">
   $(document).ready(function() {
     $('.subscribe').prop('checked', true);
