@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+            <div class="panel panel-default content">
+                <div class="page_title">Dashboard</div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -16,16 +16,16 @@
 
                     @guest
                     @else
-                    {{Form::open(array('url' => '/add_article', 'method' => 'post', 'class' => 'add_article'))}}
-                        {{ Form::text('title', null, array('id'=>'title')) }}
-                        {{ Form::text('text', null, array('id'=> 'text')) }}
+                    {{Form::open(array('url' => '/add_article', 'method' => 'post', 'class' => 'add_article clear_fl'))}}
+                        {{ Form::text('title', null, array('id'=>'title', 'placeholder' => 'Enter a title')) }}
+                        {{ Form::textarea('text', null, array('id'=> 'text', 'cols' => '98', 'placeholder' => 'Enter content')) }}
                         {{ Form::select('category', $categories) }}
-                        {{ Form::submit('Add article') }}
+                        {{ Form::submit('Add article', ['class' => 'btn_style']) }}
                     {{Form::close()}}
 
-                    <div>
-                      <input type="checkbox" name="subscribe" class="subscribe">
-                      <label for="subscribe">Подписаться на рассылку</label>
+                    <div class="subscribe">
+                      <input type="checkbox" name="subscribe" class="subscribe_check">
+                      <label for="subscribe" class="checkbox_label">Подписаться на рассылку</label>
                     </div>
                     @endguest
 

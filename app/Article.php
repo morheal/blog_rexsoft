@@ -11,7 +11,7 @@ use App\Mail\ArticlePosted;
 
 class Article extends Model
 {
-    protected $fillable = ['title', 'text', 'creator', 'category_id'];
+    protected $fillable = ['title', 'text', 'user_id', 'category_id'];
 
     //RELATIONSHIPS FUNCTIONS
     public function user()

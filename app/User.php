@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'subscribe'
+        'name', 'email', 'password', 'subscribe', 'is_admin', 'is_banned'
     ];
 
     /**
@@ -39,4 +39,20 @@ class User extends Authenticatable
       return $this->hasMany('App\Feedback');
     }
     ///////////////////////////
+
+    //Subcribing/unsubscribing from mail sending for user
+    public function subscribe()
+    {
+      $this->subscribe = true;
+      $this->save();
+      return;
+    }
+
+    public function unsubscribe()
+    {
+      $this->subscribe = false;
+      $this->save();
+      return;
+    }
+    /////////////////////////////////////////////////////////////
 }

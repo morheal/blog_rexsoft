@@ -16,7 +16,7 @@ class ArticleController extends Controller
       $title = $request->title;
       $text = $request->text;
       $category = $request->category;
-      $new_article = Article::create(['title' => $title, 'text' => $text, 'creator' => Auth::user()->id, 'category_id' => $category]);
+      $new_article = Article::create(['title' => $title, 'text' => $text, 'user_id' => Auth::user()->id, 'category_id' => $category]);
       $article_category = Category::find($category);
       $new_article->sendNotification();
       return Response::json(['article' => $new_article, 'category_name' => $article_category->name]);

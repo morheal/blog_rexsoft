@@ -1,18 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-{{Form::open(array('url' => '/add_category', 'method' => 'post', 'class' => 'add_category'))}}
-    {{ Form::text('name', null, array('id'=>'name')) }}
-    {{ Form::submit('Add category') }}
-{{Form::close()}}
-<div class="categories">
-  @foreach($categories as $category)
-  <div class="category">
-    <h4>{{$category->name}}</h4>
-    <input type="hidden" name="category_id" value="{{$category->id}}" class="category_id">
-    <p> <a href="#" class="delete_category">Delete category</a> </p>
-  </div>
-  @endforeach
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default content">
+                <div class="page_title">Categories</div>
+
+                <div class="panel-body">
+
+                  {{Form::open(array('url' => '/add_category', 'method' => 'post', 'class' => 'add_category clear_fl'))}}
+                      {{ Form::text('name', null, array('id'=>'name')) }}
+                      {{ Form::submit('Add category') }}
+                  {{Form::close()}}
+
+                  <div class="categories">
+                    @foreach($categories as $category)
+                    <div class="category">
+                      <h4 class="name">{{$category->name}}</h4>
+                      <input type="hidden" name="category_id" value="{{$category->id}}" class="category_id">
+                      <p> <a href="#" class="delete_category">Delete category</a> </p>
+                    </div>
+                    @endforeach
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">

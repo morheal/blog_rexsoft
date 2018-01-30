@@ -12,12 +12,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
 
     <script type="text/javascript" src="/js/libs.min.js"></script>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top header">
             <div class="container">
                 <div class="navbar-header">
 
@@ -38,6 +39,10 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                      @if(Auth::check() and Auth::user()->is_admin)
+                        <li><a href="/categories"> Categories </a></li>
+                        <li><a href="/users"> Users </a></li>
+                      @endif
                         &nbsp;
                     </ul>
 
@@ -54,6 +59,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    <li> <a href="/user/{{Auth::user()->id}}">Profile</a> </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

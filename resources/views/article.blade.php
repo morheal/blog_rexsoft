@@ -5,25 +5,26 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading"><h3>{{$article->title}}</h3></div>
+            <div class="panel panel-default content">
+                <div class="page_title">{{$article->title}}</div>
 
                 <div class="panel-body">
-                  <p>{{$article->text}}</p>
+                  <p class="article_text">{{$article->text}}</p>
+                  <h4 class="article_creator">Article creator: <a href="/user/{{$article->user->id}}">{{$article->user->name}}</a></h4>
                   <input type="hidden" name="article_id" value="{{$article->id}}" class="article_id">
-                  <p><a href="/category/{{$article->category->id}}">{{$article->category->name}}</a></p>
+                  <p><a href="/category/{{$article->category->id}}" class="article_category">{{$article->category->name}}</a></p>
                   @if(Auth::check() and $article->creator == Auth::user()->id)
                     <p><a href="#" class="delete_article">Delete article</a></p>
                   @endif
                 </div>
             </div>
             <!--Feedback section-->
-            <div class="panel panel-default">
+            <div class="panel panel-default content">
                 <div class="panel-heading"><h3>Feedbacks to this article</h3></div>
 
                 @guest
                 @else
-                {{Form::open(array('url' => '/add_feedback', 'method' => 'post', 'class' => 'add_feedback'))}}
+                {{Form::open(array('url' => '/add_feedback', 'method' => 'post', 'class' => 'add_feedback clear_fl'))}}
                     {{ Form::text('text', null, array('id'=>'text')) }}
                     {{ Form::submit('Add feedback') }}
                 {{Form::close()}}

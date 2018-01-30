@@ -15,7 +15,6 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/categories', 'HomeController@categories');
 
 //ARTICLE CONTROLLER ROUTES
 Route::get('/article/{id}', 'ArticleController@articleShow');
@@ -38,3 +37,12 @@ Route::post('/unsubscribe', 'UserController@unsubscribe');
 Route::get('/google_register', 'Auth\LoginController@redirectToProvider');
 Route::get('/google_login', 'Auth\LoginController@redirectToProvider');
 Route::get('/google_callback', 'Auth\LoginController@handleProviderCallback');
+
+//ADMIN AUTHENTIFICATION ROUTES
+Route::middleware('admin')->group(function() {
+  Route::get('/users', 'AdminController@showUsers');
+  Route::get('/categories', 'HomeController@categories');
+});
+
+//USER CONTROLLER ROUTES
+Route::get('/user/{id}', 'UserController@userProfile');
